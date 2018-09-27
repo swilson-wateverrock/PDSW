@@ -56,11 +56,11 @@ public class JDBCExample {
             }
             System.out.println("-----------------------");
             
-            /*
+            
             int suCodigoECI=2133541;
             registrarNuevoProducto(con, suCodigoECI, "Willson Melo", 99999999);            
             con.commit();
-            */
+            
             
             con.close();
                                    
