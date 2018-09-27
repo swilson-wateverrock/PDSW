@@ -44,7 +44,7 @@ public class JDBCExample {
             con.setAutoCommit(false);
                  
             
-            System.out.println("Valor total pedido 1: "+valorTotalPedido(con, 1));
+            System.out.println("Valor total pedido 1: "+valorTotalPedido(con, 2));
             
             List<String> prodsPedido=nombresProductosPedido(con, 1);
             
