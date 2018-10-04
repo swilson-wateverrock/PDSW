@@ -20,11 +20,21 @@ package edu.eci.pdsw.samples.services.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.sql.SQLException;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.TipoItemMapper;
+import edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
+import edu.eci.pdsw.samples.entities.Cliente;
+import edu.eci.pdsw.samples.entities.Item;
+import edu.eci.pdsw.samples.entities.ItemRentado;
+import edu.eci.pdsw.samples.entities.TipoItem;
 
 /**
  *
@@ -57,26 +67,41 @@ public class MyBatisExample {
      * @param args
      * @throws SQLException 
      */
-    public static void main(String args[]) throws SQLException {
-        SqlSessionFactory sessionfact = getSqlSessionFactory();
-
-        SqlSession sqlss = sessionfact.openSession();
-
-        
-        //Crear el mapper y usarlo: 
-        //ClienteMapper cm=sqlss.getMapper(ClienteMapper.class)
-        //cm...
-        
-        
-        
-        sqlss.commit();
-        
-        
-        sqlss.close();
-
-        
-        
-    }
+	public static void main(String args[]) throws SQLException {
+		//Importante!!!!!!!!!! estudiar esto para el parcial.
+		
+		Cliente pruebaCliente = new Cliente("Willson Melo Merchan", 2133541, "3123214148", "Dimensión c-137 planeta Tierra", "swilson@randm.com");
+		TipoItem pruebaTipoItem = new TipoItem(1, "Video");
+		Item pruebaItem = new Item(pruebaTipoItem, 137, "Rick and Morty", "kha", new Date(9152018), 5000, "DVD", "Ficción");
+		
+	
+	    SqlSessionFactory sessionfact = getSqlSessionFactory();
+	    SqlSession sqlss = sessionfact.openSession();
+	    ClienteMapper clMap = sqlss.getMapper(ClienteMapper.class);
+	    ItemMapper itMap = sqlss.getMapper(ItemMapper.class);
+	    ItemRentadoMapper itReMap = sqlss.getMapper(ItemRentadoMapper.class);
+	    TipoItemMapper tiIMap = sqlss.getMapper(TipoItemMapper.class);
+	    
+	    //System.out.println(clMap.consultarClientes());
+	    //System.out.println(clMap.consultarCliente(22));
+	    
+	    //System.out.println(itMap.consultarItems());
+	    //System.out.println(itReMap.consultarItemsRentados());
+	    //System.out.println(itMap.consultarItem(137));
+	    //itMap.insertItem(pruebaItem);
+	    
+	   
+	    
+	    //System.out.println(itReMap.consultarItemRentado(1));
+	    
+	    //System.out.println(tiIMap.consultarTiposItems());
+	    //System.out.println(tiIMap.consultarTipoItem(1));
+	    //tiIMap.insertTipoItem(pruebaTipoItem);//este item ya esta insertado
+	   
+	    
+	    sqlss.commit();
+	    sqlss.close();
+	}
 
 
 }

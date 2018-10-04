@@ -15,16 +15,17 @@ import java.sql.Date;
 public class ItemRentado implements Serializable {
 
     private int id;
-
+    private Cliente cliente;
     private Item item;
-    private Date fechainiciorenta;
-    private Date fechafinrenta;
+    private Date fechaInicioRenta;
+    private Date fechaFinRenta;
 
-    public ItemRentado(int id, Item item, Date fechainiciorenta, Date fechafinrenta) {
+    public ItemRentado(int id, Cliente cliente, Item item, Date fechainiciorenta, Date fechafinrenta) {
         this.id = id;
         this.item = item;
-        this.fechainiciorenta = fechainiciorenta;
-        this.fechafinrenta = fechafinrenta;
+        this.cliente = cliente;
+        this.fechaInicioRenta = fechainiciorenta;
+        this.fechaFinRenta = fechafinrenta;
     }
 
     public ItemRentado() {
@@ -47,25 +48,33 @@ public class ItemRentado implements Serializable {
     }
 
     public Date getFechainiciorenta() {
-        return fechainiciorenta;
+        return fechaInicioRenta;
     }
 
     public void setFechainiciorenta(Date fechainiciorenta) {
-        this.fechainiciorenta = fechainiciorenta;
+        this.fechaInicioRenta = fechainiciorenta;
     }
 
     public Date getFechafinrenta() {
-        return fechafinrenta;
+        return fechaFinRenta;
     }
 
     public void setFechafinrenta(Date fechafinrenta) {
-        this.fechafinrenta = fechafinrenta;
+        this.fechaFinRenta = fechafinrenta;
     }
 
     @Override
     public String toString() {
-        return "ItemRentado{" + "id=" + id + ", item=" + item + ", fechainiciorenta=" + fechainiciorenta + ", fechafinrenta=" + fechafinrenta + '}';
+        return "ItemRentado{" + "id=" + id + ", item=" + item + ", fechaInicioRenta=" + fechaInicioRenta + ", fechaFinRenta=" + fechaFinRenta + "}";
     }
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
     
     

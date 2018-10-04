@@ -7,13 +7,12 @@ package edu.eci.pdsw.samples.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  *
  * @author 2106913
  */
-public class Cliente implements Serializable{
+public class Cliente implements Serializable {
     
     private String nombre;
     private long documento;
