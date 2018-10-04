@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper">
+
+	<select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
+		SELECT * FROM VI_CLIENTES;
+	</select>
+	
+	<select parameterType="map" id="consultarCliente" resultMap="ClienteResult">
+		SELECT * FROM VI_CLIENTES WHERE documento = #{idCliente};
+	</select>
+
+	<insert id="insertarCliente" parameterType="Cliente" keyProperty="id">
+		INSERT INTO VI_CLIENTES (documento, nombre, telefono, direccion, email, vetado)
+		VALUES (#{documento}, #{nombre}, #{telefono}, #{direccion}, #{email}, #{vetado});
+	</insert>
+	
+
+	<resultMap type='Cliente' id='ClienteResult'>
+		<id property='documento' column='documento' />
+		<result property='nombre' column='nombre' />
+		<result property='telefono' column='telefono' />
+		<result property='direccion' column='direccion' />
+		<result property='email' column='email' />
+		<result property='vetado' column='vetado' />
+		
+	</resultMap>
+
+</mapper>

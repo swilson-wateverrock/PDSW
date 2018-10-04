@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemRentadoMapper">
+
+	<select parameterType="map" id="consultarItemsRentados" resultMap="ItemRentadoResult">
+		SELECT * FROM bdprueba.VI_ITEMRENTADO;
+	</select>
+	
+	<select parameterType="map" id="consultarItemRentado" resultMap="ItemRentadoResult">
+		SELECT * FROM bdprueba.VI_ITEMRENTADO WHERE id = #{idItemRentado};
+	</select>
+	
+	<insert id="insertItemRentado" parameterType="ItemRentado" keyProperty="id">
+		INSERT INTO VI_ITEMRENTADO (id, CLIENTES_documento, ITEMS_id, fechainiciorenta, fechafinrenta)
+			VALUES (#{id}, #{cliente.documento}, #{item.id}, #{fechaInicioRenta}, #{fechaFinRenta})
+	</insert>
+
+	<resultMap type='ItemRentado' id='ItemRentadoResult'>
+		<id property='id' column='id' />
+		<result property='fechaInicioRenta' column='fechainiciorenta' />
+		<result property='fechaFinRenta' column='fechafinrenta' />
+		<association property='cliente' column='CLIENTES_documento' javaType='Cliente' resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ClienteMapper.ClienteResult' />
+		<association property='item' column='ITEMS_id' javaType='Item' resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult' />
+	</resultMap>
+
+</mapper>
