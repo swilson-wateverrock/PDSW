@@ -83,7 +83,7 @@ public class MyBatisExample {
 	    TipoItemMapper tiIMap = sqlss.getMapper(TipoItemMapper.class);
 	    
 	    //clMap.insertarCliente(pruebaCliente);
-	    //System.out.println(clMap.consultarClientes());
+	    System.out.println(clMap.consultarClientes());
 	    //System.out.println(clMap.consultarCliente(2133541));
 	    
 	    //System.out.println(itMap.consultarItems());
