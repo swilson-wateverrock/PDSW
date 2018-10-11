@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="edu.eci.pdsw.persistence.mybatisimpl.mappers.CommentsMapper">
+
+    <resultMap type='Comment' id='CommentResult'>
+        <id property='id' column='id'/>        
+        <result property='creationDate' column='creation_date'/>
+        <result property='content' column='content'/>
+        <association property='author' columnPrefix='a'  javaType='User' resultMap='edu.eci.pdsw.persistence.mybatisimpl.mappers.UserResult' />
+    </resultMap>
+
+    <select id="searchCommentsByBlogTitle" resultMap="CommentResult" parameterType="string">
+    	SELECT
+            c.id,          
+            c.creation_date,
+            a.login,
+            a.name,
+            a.lastname,
+            c.content
+            
+        FROM
+            BLOG_COMMENT as c
+        JOIN BLOG_USUARIO as a ON c.author = BLOG_USUARIO.login 
+        WHERE c.blog_id in (SELECT
+        						b.id            					
+        					FROM
+            					BLOG as b
+            					
+            				WHERE (b.title = #{tittle})
+        )
+        
+    </select>
+    
+    <select id="searchOffensiveLanguageComments" resultMap="CommentResult" >
+    	SELECT
+            c.id,          
+            c.creation_date,
+            a.login,
+            a.name,
+            a.lastname,
+            c.content
+        FROM
+            BLOG_COMMENT as c
+        JOIN BLOG_USUARIO as a ON c.author = alogin 
+        WHERE ( LOWER(c.content) like "%tonto%" or LOWER(c.content) like "%burro%" )
+        
+        
+    </select>
+    
+
+</mapper>
