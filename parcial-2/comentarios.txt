@@ -1,0 +1,4 @@
+Tuve un Cosntante error que decia:
+No sean creado las impelementaciones de CommentDAO obviamente ya las tenía despues de muchos intentos sirvió
+y ni idea de como no hice las pruebas, las historias de uso en teoría estan bien y ya
+

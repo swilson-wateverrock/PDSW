@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.pdsw.persistence.mybatisimpl.mappers.CommentsMapper">
+
+	<resultMap type="Comment" id="CommentResult">
+		<id property='id' column='id' />
+		<result property='creationDate' column='creation_date' />
+		<result property='content' column='content' />
+		<association property="author" column="author" javaType="User" resultMap="edu.eci.pdsw.persistence.mybatisimpl.mappers.UserMapper.UserResult"></association>
+	</resultMap>
+
+	<select id="searchCommentsByBlogTitle" resultMap="CommentResult" parameterType="map">
+			SELECT u.login,
+				u.name,
+				c.creation_date,
+				c.content
+			FROM
+				BLOG_USUARIO as u 
+				LEFT JOIN BLOG as b ON u.login=b.author 
+				LEFT JOIN BLOG_COMMENT as c ON b.id=c.blog_id
+		<if test="title != null">
+			WHERE b.title=#{title}
+			ORDER BY b.creation_date
+			
+		</if>
+	</select>
+
+	<resultMap type="Comment" id="OffensiveComments">
+		<result property="content" column="content"/>
+		<association property="author" column="author" javaType="User" resultMap="edu.eci.pdsw.persistence.mybatisimpl.mappers.UserMapper.UserResult"></association>
+		<association property="blog" javaType="Blog" resultMap="edu.eci.pdsw.persistence.mybatisimpl.mappers.BlogMapper.BlogResult"></association>
+	</resultMap>
+
+	<select id="searchOffensiveLanguageComments" resultMap="OffensiveComments" parameterType="map">
+			SELECT u.login,
+				u.name,
+				b.id,
+				b.title,
+				c.content
+			FROM
+				BLOG_USUARIO as u 
+				LEFT JOIN BLOG as b ON u.login=b.author 
+				LEFT JOIN BLOG_COMMENT as c ON b.id=c.blog_id
+			WHERE LOWER(c.content) LIKE "%tonto%" OR LOWER(c.content) LIKE "%burro%"
+			ORDER BY u.login ASC
+			
+	</select>
+
+</mapper>
